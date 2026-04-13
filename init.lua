@@ -2,6 +2,12 @@ vim.g.mapleader = "\\"
 require('config.lazy')
 require('config.remap')
 
+vim.filetype.add({
+    extension = {
+        cu = "cuda",
+        cuh = "cuda",
+    },
+})
 --nvim-treesitter
 require("config.nvim-treesitter")
 

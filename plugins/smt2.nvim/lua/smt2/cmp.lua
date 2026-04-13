@@ -5,7 +5,7 @@ function source.new()
 end
 
 function source:get_keyword_pattern()
-  return [[\%([%w%-%._:+*/<>=!?]\+\)]]
+	return [[\%([a-zA-Z0-9_\.\-:+*/<>=!?]\+\)]]
 end
 
 function source:is_available()

@@ -5,14 +5,20 @@ M.config = {}
 function M.setup(opts)
   M.config = vim.tbl_deep_extend("force", M.config, opts or {})
 
-  -- Register nvim-cmp source if cmp is available
   local ok, cmp = pcall(require, "cmp")
   if ok then
     cmp.register_source("smt2", require("smt2.cmp").new())
+    -- Add smt2 source for smt2 filetype without touching global config
+    cmp.setup.filetype("smt2", {
+      sources = cmp.config.sources({
+        { name = "smt2" },
+        { name = "nvim_lsp" },
+      }),
+    })
   end
 end
 
---- Omnifunc for smt2 buffers (works without nvim-cmp)
+--- Omnifunc fallback
 function M.omnifunc(findstart, base)
   local items = require("smt2.complete").items
 
